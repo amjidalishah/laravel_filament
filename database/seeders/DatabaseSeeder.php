@@ -1,10 +1,10 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder; 
-use Spatie\Permission\Models\Role; 
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,16 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
- 
-        $user1 =   User::factory()->create([
+        // Ensure roles exist before assigning them
+        $adminRole = Role::firstOrCreate(['name' => 'Admin', 'guard_name' => 'web']);
+        $managerRole = Role::firstOrCreate(['name' => 'Manager', 'guard_name' => 'web']);
+        $userRole = Role::firstOrCreate(['name' => 'User', 'guard_name' => 'web']);
+
+        // Create an admin user and assign role
+        $adminUser = User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',
-        ]);  
-        $role = Role::create(['name' => 'Admin']);
-        Role::create(['name' => 'Manager']);
-        Role::create(['name' => 'User']);
-        $user1->assignRole($role);   
-
+        ]);
+        $adminUser->assignRole($adminRole);
     }
 }
