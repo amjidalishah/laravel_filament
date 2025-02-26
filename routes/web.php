@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\QRCode;
+//use App\Models\QRCode;
 use Illuminate\Support\Facades\Route;
  
 use Filament\Facades\Filament;
@@ -20,10 +20,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/qr/{uuid}', function ($uuid) {
-    $qrCode = QRCode::where('uuid', $uuid)->firstOrFail();
-    return response(QrCode::size(200)->generate($qrCode->url))
-        ->header('Content-Type', 'image/svg+xml');
-});
+// Route::get('/qr/{uuid}', function ($uuid) {
+//     $qrCode = QRCode::where('uuid', $uuid)->firstOrFail();
+//     return response(QrCode::size(200)->generate($qrCode->url))
+//         ->header('Content-Type', 'image/svg+xml');
+// });
 
  

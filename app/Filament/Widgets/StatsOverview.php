@@ -4,7 +4,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\User;
-use App\Models\QRCode;
+//use App\Models\QRCode;
 use Carbon\Carbon;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -17,7 +17,7 @@ class StatsOverview extends BaseWidget
             Stat::make('Total Users', User::query()->count()),
                 // ->chart($this->getDailyRegistrations()),
 
-            Stat::make('QR Codes', QRCode::query()->count()),
+           // Stat::make('QR Codes', QRCode::query()->count()),
                 // ->chart($this->getDailyQRCodeCreations()),
 
             Stat::make('Clicks per Month', '12'),
@@ -36,14 +36,14 @@ class StatsOverview extends BaseWidget
             ->toArray();
     }
 
-    private function getDailyQRCodeCreations(): array
-    {
-        return QRCode::query()
-            ->where('created_at', '>=', now()->subDays(6)) // Last 7 days
-            ->selectRaw('DATE(created_at) as day, COUNT(*) as count')
-            ->groupBy('day')
-            ->orderBy('day')
-            ->pluck('count')
-            ->toArray();
-    }
+    // private function getDailyQRCodeCreations(): array
+    // {
+    //     return QRCode::query()
+    //         ->where('created_at', '>=', now()->subDays(6)) // Last 7 days
+    //         ->selectRaw('DATE(created_at) as day, COUNT(*) as count')
+    //         ->groupBy('day')
+    //         ->orderBy('day')
+    //         ->pluck('count')
+    //         ->toArray();
+    // }
 }
